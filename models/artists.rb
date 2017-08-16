@@ -10,7 +10,4 @@ class Artists
   end
 
 
-
-
-
 end
