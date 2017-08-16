@@ -19,7 +19,7 @@ class Albums
   end
 
   def Albums.all()
-    db = PG.connect({dbname: 'music', host:'localhost'})
+    db = PG.connect({dbname: 'music_homework', host:'localhost'})
     sql = 'SELECT * FROM albums;'
     db.prepare('all', sql)
     all_albums = db.exec_prepared('all', [])
