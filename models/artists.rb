@@ -1,5 +1,5 @@
 require('pg')
-# require_relative('../db/music.sql')
+require_relative('../db/music.sql')
 
 class Artists
   attr_accessor(:name)
@@ -13,7 +13,16 @@ class Artists
     sql = '
     SELECT * FROM artists
     WHERE artist_id = $1;'
-  
+
+  end
+
+  def Artists.all()
+    db = PG.connect({dbname: 'music', host:'localhost'})
+    sql = 'SELECT * FROM artists;'
+    db.prepare('all', sql)
+    all_artists = db.exec_prepared('all', [])
+    db.close()
+    return all_artists.map {|artist_hash| Artists.new(artist_hash)}
   end
 
   def save
